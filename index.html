@@ -3,28 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <title>Ultra Secure Crypto App</title>
+
+    <script type="text/javascript">
+        var input = "";
+        var key = "";
+        var mode = "None";
+        var boxHeight = 100;
+    </script>
+
+
     <style>
-        body {background-color: powderblue;}
-        h1 {color: red;}
-        p {color: blue;}
-        #mydiv {
-            position:fixed;
+
+        body {
+            background-color: powderblue;
+        }
+
+        h1 {
+            color: red;
+        }
+
+        h3 {
+            color: forestgreen;
+        }
+
+        p {
+            color: blue;
+        }
+
+        #outerbox {
+            position: fixed;
             top: 50%;
             left: 50%;
-            width:40em;
-            height:40em;
+            width: 46em;
+            height: 40em;
             margin-top: -20em; /*set to a negative number 1/2 of your height*/
-            margin-left: -20em; /*set to a negative number 1/2 of your width*/
+            margin-left: -23em; /*set to a negative number 1/2 of your width*/
             border: 1px solid #ccc;
             background-color: #f3f3f3;
         }
 
+        #innerbox {
+            position: fixed;
+            top: 62%;
+            left: 50.8%;
+            width: 44em;
+            height: 32.8em;
+            margin-top: -20em; /*set to a negative number 1/2 of your height*/
+            margin-left: -23em; /*set to a negative number 1/2 of your width*/
+            border: none; /*  set to none  */
+            background-color: #f3f3f3;
+        }
 
-  </style>
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        fieldset {
+            display: block;
+            border: 0;
+            margin-top: 16px;
+            margin-left: 8px;
+            margin-right: 2px;
+            padding-top: 0.35em;
+            padding-bottom: 0.625em;
+            padding-left: 0.75em;
+            padding-right: 0.75em;
+
+        }
+
+        #inputdata {
+            width: 650px;
+            height: 60px;
+            resize: none;
+        }
+
+        #outputdata {
+            width: 650px;
+            height: 100px;
+            resize: none;
+        }
+
+        #secretkey {
+            width: 650px;
+            height: 60px;
+            resize: none;
+        }
+
+        #answer {
+            display: flex;
+            justify-content: center;
+        }
+
+    </style>
+
 </head>
-<body>
-    <h1>This is mega ultra super secure crypto app</h1>
-    <div id="mydiv">Test Div</div>
-    <p class="paragraph-main">this is text</p>
+
+<body background="https://jooinn.com/images/crumpled-paper-128.jpg">
+<h1>This is mega ultra super secure crypto app</h1>
+<div id="outerbox">
+    <fieldset id="fieldset">
+        <input type="button" class="button" value="OTP-encrypt" onclick="showOTPencryptDiv();">
+        <input type="button" class="button" value="OTP-decrypt" onclick="showOTPdecryptDiv();">
+        <input type="button" class="button" value="SHA2-to-SHA512" onclick="showSHA_2toSHA_512Div();">
+        <input type="button" class="button" value="MD5-decrypt" onclick="showMD5_decryptDiv();">
+    </fieldset>
+
+    <div id="innerbox">
+        <div id="inputbox" style="text-align:center;border:0 solid lawngreen;display:none;">
+            <h3>Please insert your data bellow:</h3>
+            <textarea id="inputdata">Copy paste your data here...</textarea>
+
+        </div>
+
+        <div id="secretkeybox" style="text-align:center;border:0 solid lawngreen;display:none;">
+            <h3>Please insert your key bellow:</h3>
+            <textarea id="secretkey">Insert key pls.</textarea>
+
+        </div>
+
+        <div align="center" id="getanswer" style="border:0 solid lawngreen;display:none;">
+            <input id="answer" type="button" class="button" value="Get my answer!" onclick="getAnswer();">
+        </div>
+
+        <div id="outputarea" style="text-align:center;border:0 solid lawngreen;display:none;">
+            <h3>Here is your answer:</h3>
+            <textarea id="outputdata" disabled></textarea>
+
+        </div>
+
+    </div>
+
+    <div id="noinput" style="display:block;">
+        <div style="text-align:center;border:1px solid red">
+            Currently selected mode is: None ( please select mode from above! )
+
+        </div>
+    </div>
+
+    <div id="OTP-encrypt" style="display:none;">
+        <div style="text-align:center;border:1px solid lawngreen">
+            Currently selected mode is: OTP-encrypt
+
+        </div>
+    </div>
+
+    <div id="OTP-decrypt" style="display:none;">
+        <div style="text-align:center;border:1px solid lawngreen">
+            Currently selected mode is: OTP-decrypt
+
+        </div>
+    </div>
+
+    <div id="SHA2-to-SHA512" style="display:none;">
+        <div style="text-align:center;border:1px solid lawngreen">
+            Currently selected mode is: SHA2-to-SHA512
+
+        </div>
+    </div>
+
+    <div id="MD5-decrypt" style="display:none;">
+        <div style="text-align:center;border:1px solid lawngreen">
+            Currently selected mode is: MD5-decrypt
+
+        </div>
+    </div>
+
+
+</div>
+<p class="paragraph-main">this is text</p>
 </body>
+
+<script>
+
+    function showOTPencryptDiv() {
+        mode = "OTP-encrypt";
+        boxHeight = "70px";
+        document.getElementById('noinput').style.display = "none";
+        document.getElementById('OTP-decrypt').style.display = "none";
+        document.getElementById('SHA2-to-SHA512').style.display = "none";
+        document.getElementById('MD5-decrypt').style.display = "none";
+        document.getElementById('OTP-encrypt').style.display = "block";
+        document.getElementById('secretkeybox').style.display = "block";
+        showStuff();
+
+    }
+
+    function showOTPdecryptDiv() {
+        mode = "OTP-decrypt";
+        boxHeight = "70px";
+        document.getElementById('noinput').style.display = "none";
+        document.getElementById('SHA2-to-SHA512').style.display = "none";
+        document.getElementById('MD5-decrypt').style.display = "none";
+        document.getElementById('OTP-encrypt').style.display = "none";
+        document.getElementById('OTP-decrypt').style.display = "block";
+        document.getElementById('secretkeybox').style.display = "block";
+        showStuff();
+
+    }
+
+    function showSHA_2toSHA_512Div() {
+        mode = "SHA2-to-SHA512";
+        boxHeight = "199px";
+        document.getElementById('noinput').style.display = "none";
+        document.getElementById('OTP-decrypt').style.display = "none";
+        document.getElementById('MD5-decrypt').style.display = "none";
+        document.getElementById('OTP-encrypt').style.display = "none";
+        document.getElementById('SHA2-to-SHA512').style.display = "block";
+        document.getElementById('secretkeybox').style.display = "none";
+        showStuff();
+
+    }
+
+    function showMD5_decryptDiv() {
+        mode = "MD5-decrypt";
+        boxHeight = "199px";
+        document.getElementById('noinput').style.display = "none";
+        document.getElementById('OTP-decrypt').style.display = "none";
+        document.getElementById('SHA2-to-SHA512').style.display = "none";
+        document.getElementById('OTP-encrypt').style.display = "none";
+        document.getElementById('MD5-decrypt').style.display = "block";
+        document.getElementById('secretkeybox').style.display = "none";
+        showStuff();
+    }
+
+    function showStuff() {
+        document.getElementById('inputdata').style.height = boxHeight;
+        document.getElementById('inputbox').style.display = "block";
+        document.getElementById('getanswer').style.display = "block";
+        document.getElementById('outputarea').style.display = "none";
+    }
+
+    function getAnswer() {
+        document.getElementById('outputarea').style.display = "block";
+        var input = document.getElementById("inputdata").value;
+        var key = document.getElementById("secretkey").value;
+        document.getElementById('outputdata').value = input;
+    }
+
+</script>
+
 </html>
