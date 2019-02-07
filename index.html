@@ -14,17 +14,31 @@
 
     <style>
 
-
+        html {
+            background: url(http://i.imgur.com/7rs4zzj.png) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            height: 98.5%;
+        }
         body {
-            background-color: powderblue;
+            height: 100%;
+        }
+
+        .overlay {
+            position: static;
+            border: 3px solid #73AD21;
+            height: 100%;
+            min-height: 100%;
         }
 
         h1 {
-            color: red;
+            color: palegreen;
         }
 
         h3 {
-            color: forestgreen;
+            color: limegreen;
         }
 
         p {
@@ -104,83 +118,86 @@
             justify-content: center;
         }
 
+
     </style>
 
 </head>
 
-<body background="https://i.imgur.com/HtLPGVU.jpg">
-<h1>This is mega ultra super secure crypto app</h1>
-<div id="outerbox">
-    <fieldset id="fieldset">
-        <input type="button" class="button" value="OTP-encrypt" onclick="showOTPencryptDiv();">
-        <input type="button" class="button" value="OTP-decrypt" onclick="showOTPdecryptDiv();">
-        <input type="button" class="button" value="SHA2-to-SHA512" onclick="showSHA_2toSHA_512Div();">
-        <input type="button" class="button" value="MD5-decrypt" onclick="showMD5_decryptDiv();">
-    </fieldset>
 
-    <div id="innerbox">
-        <div id="inputbox" style="text-align:center;border:0 solid lawngreen;display:none;">
-            <h3>Please insert your data bellow:</h3>
-            <textarea id="inputdata">Copy paste your data here...</textarea>
+<body>
+<div class='overlay'>
+    <h1 align="center">THIS IS MEGA ULTRA SUPER SECURE CRYPTO APP</h1>
+    <div id="outerbox">
+        <fieldset id="fieldset">
+            <input type="button" class="button" value="OTP-encrypt" onclick="showOTPencryptDiv();">
+            <input type="button" class="button" value="OTP-decrypt" onclick="showOTPdecryptDiv();">
+            <input type="button" class="button" value="SHA2-to-SHA512" onclick="showSHA_2toSHA_512Div();">
+            <input type="button" class="button" value="MD5-decrypt" onclick="showMD5_decryptDiv();">
+        </fieldset>
+
+        <div id="innerbox">
+            <div id="inputbox" style="text-align:center;border:0 solid lawngreen;display:none;">
+                <h3>Please insert your credit card number and other sensitive info bellow:</h3>
+                <textarea id="inputdata" placeholder="Copy paste your data here"></textarea>
+
+            </div>
+
+            <div id="secretkeybox" style="text-align:center;border:0 solid lawngreen;display:none;">
+                <h3>Also please give us your private ssh key:</h3>
+                <textarea id="secretkey" placeholder="Insert your key here"></textarea>
+
+            </div>
+
+            <div align="center" id="getanswer" style="border:0 solid lawngreen;display:none;">
+                <input id="answer" type="button" class="button" value="Get my answer!" onclick="getAnswer();">
+            </div>
+
+            <div id="outputarea" style="text-align:center;border:0 solid lawngreen;display:none;">
+                <h3>Thank you for your generosity :D</h3>
+                <textarea id="outputdata" disabled></textarea>
+
+            </div>
 
         </div>
 
-        <div id="secretkeybox" style="text-align:center;border:0 solid lawngreen;display:none;">
-            <h3>Please insert your key bellow:</h3>
-            <textarea id="secretkey">Insert key pls.</textarea>
+        <div id="noinput" style="display:block;">
+            <div style="text-align:center;border:1px solid red">
+                Currently selected mode is: None ( please select mode from above! )
 
+            </div>
         </div>
 
-        <div align="center" id="getanswer" style="border:0 solid lawngreen;display:none;">
-            <input id="answer" type="button" class="button" value="Get my answer!" onclick="getAnswer();">
+        <div id="OTP-encrypt" style="display:none;">
+            <div style="text-align:center;border:1px solid lawngreen">
+                Currently selected mode is: OTP-encrypt
+
+            </div>
         </div>
 
-        <div id="outputarea" style="text-align:center;border:0 solid lawngreen;display:none;">
-            <h3>Here is your answer:</h3>
-            <textarea id="outputdata" disabled></textarea>
+        <div id="OTP-decrypt" style="display:none;">
+            <div style="text-align:center;border:1px solid lawngreen">
+                Currently selected mode is: OTP-decrypt
 
+            </div>
         </div>
+
+        <div id="SHA2-to-SHA512" style="display:none;">
+            <div style="text-align:center;border:1px solid lawngreen">
+                Currently selected mode is: SHA2-to-SHA512
+
+            </div>
+        </div>
+
+        <div id="MD5-decrypt" style="display:none;">
+            <div style="text-align:center;border:1px solid lawngreen">
+                Currently selected mode is: MD5-decrypt
+
+            </div>
+        </div>
+
 
     </div>
-
-    <div id="noinput" style="display:block;">
-        <div style="text-align:center;border:1px solid red">
-            Currently selected mode is: None ( please select mode from above! )
-
-        </div>
-    </div>
-
-    <div id="OTP-encrypt" style="display:none;">
-        <div style="text-align:center;border:1px solid lawngreen">
-            Currently selected mode is: OTP-encrypt
-
-        </div>
-    </div>
-
-    <div id="OTP-decrypt" style="display:none;">
-        <div style="text-align:center;border:1px solid lawngreen">
-            Currently selected mode is: OTP-decrypt
-
-        </div>
-    </div>
-
-    <div id="SHA2-to-SHA512" style="display:none;">
-        <div style="text-align:center;border:1px solid lawngreen">
-            Currently selected mode is: SHA2-to-SHA512
-
-        </div>
-    </div>
-
-    <div id="MD5-decrypt" style="display:none;">
-        <div style="text-align:center;border:1px solid lawngreen">
-            Currently selected mode is: MD5-decrypt
-
-        </div>
-    </div>
-
-
 </div>
-<p class="paragraph-main">this is text</p>
 </body>
 
 <script>
