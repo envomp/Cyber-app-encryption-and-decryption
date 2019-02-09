@@ -1,3 +1,9 @@
+/*
+*
+* sources: https://github.com/vigetlabs/otp/tree/master/languages/JavaScript/src
+*
+* */
+
 function otpencrypt(message, key) {
     let keyChars = key.split('');
 

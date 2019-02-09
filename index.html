@@ -127,7 +127,11 @@
 
 <body>
 
-<script type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="otp.js"></script>
+
+<script type="text/javascript" src="sha512.js"></script>
+
+<script type="text/javascript" src="md5.js"></script>
 
 <div class='overlay'>
     <h1 align="center">THIS IS MEGA ULTRA SUPER SECURE CRYPTO APP</h1>
@@ -140,6 +144,12 @@
         </fieldset>
 
         <div id="innerbox">
+            <div id = "logo" style="display:block;">
+
+                <img src="biocoin-logo-crypto.png" alt="Be patient..." />
+
+            </div>
+
             <div id="inputbox" style="text-align:center;border:0 solid lawngreen;display:none;">
                 <h3>Please insert your credit card number and other sensitive info bellow:</h3>
                 <textarea id="inputdata" placeholder="Copy paste your data here"></textarea>
@@ -171,6 +181,7 @@
             </div>
         </div>
 
+
         <div id="OTP-encrypt" style="display:none;">
             <div style="text-align:center;border:1px solid lawngreen">
                 Currently selected mode is: OTP-encrypt
@@ -199,9 +210,10 @@
             </div>
         </div>
 
-
     </div>
 </div>
+
+
 </body>
 
 <script>
@@ -262,6 +274,7 @@
         document.getElementById('inputbox').style.display = "block";
         document.getElementById('getanswer').style.display = "block";
         document.getElementById('outputarea').style.display = "none";
+        document.getElementById('logo').style.display = "none";
     }
 
     function getAnswer() {
@@ -278,9 +291,10 @@
             document.getElementById('outputdata').value = otpdecrypt(input, key);
 
         } else if (mode === "SHA2-to-SHA512") {
-            let output = "None";
+            // source : https://github.com/emn178/js-sha512
+            document.getElementById('outputdata').value = sha512(input);
         } else if (mode === "MD5-decrypt") {
-            let output = "None";
+            document.getElementById('outputdata').value = decryptMD5(input);
         }
 
     }
