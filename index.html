@@ -270,7 +270,6 @@
         let key = document.getElementById("secretkey").value;
         if (mode === "OTP-encrypt") {
 
-            alert(encrypt(input, key));
             // source : https://github.com/vigetlabs/otp/blob/master/languages/JavaScript/src/encrypt.js
             document.getElementById('outputdata').value = otpencrypt(input, key);
 
