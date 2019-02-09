@@ -6,10 +6,8 @@
     <title>Ultra Secure Crypto App</title>
 
     <script type="text/javascript">
-        var input = "";
-        var key = "";
-        var mode = "None";
-        var boxHeight = 100;
+        let mode = "None";
+        let boxHeight = 100;
     </script>
 
 
@@ -128,6 +126,9 @@
 
 
 <body>
+
+<script type="text/javascript" src="index.js"></script>
+
 <div class='overlay'>
     <h1 align="center">THIS IS MEGA ULTRA SUPER SECURE CRYPTO APP</h1>
     <div id="outerbox">
@@ -265,10 +266,26 @@
 
     function getAnswer() {
         document.getElementById('outputarea').style.display = "block";
-        var input = document.getElementById("inputdata").value;
-        var key = document.getElementById("secretkey").value;
-        document.getElementById('outputdata').value = input;
+        let input = document.getElementById("inputdata").value;
+        let key = document.getElementById("secretkey").value;
+        if (mode === "OTP-encrypt") {
+
+            alert(encrypt(input, key));
+            // source : https://github.com/vigetlabs/otp/blob/master/languages/JavaScript/src/encrypt.js
+            document.getElementById('outputdata').value = otpencrypt(input, key);
+
+        } else if (mode === "OTP-decrypt") {
+            // source : https://github.com/vigetlabs/otp/blob/master/languages/JavaScript/src/decrypt.js
+            document.getElementById('outputdata').value = otpdecrypt(input, key);
+
+        } else if (mode === "SHA2-to-SHA512") {
+            let output = "None";
+        } else if (mode === "MD5-decrypt") {
+            let output = "None";
+        }
+
     }
+
 
 </script>
 
