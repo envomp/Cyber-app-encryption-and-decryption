@@ -243,20 +243,15 @@
     }
 
 
-
     function decryptMD5(hash) {
 
-        request('GET',`https://md5decrypt.net/en/Api/api.php?hash=${hash}&hash_type=md5&email=envomp@ttu.ee&code=6451ee93cc70c808`)
+        request('GET',`https://md5.ovh/index.php?md5=${hash}&result=json`)
             .then(data=>{
                 console.log(data);
             }).catch(error => {
             console.error(`Shit!` ${error.statusText})
         });
     }
-</script>
-
-
-<script>
 
     function showOTPencryptDiv() {
         mode = "OTP-encrypt";
