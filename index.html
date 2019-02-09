@@ -220,6 +220,7 @@
     function request (method, url) {
         return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
+
             xhr.open(method, url);
             xhr.onload = function () {
                 if (this.status >= 200 && this.status < 300) {
@@ -245,14 +246,14 @@
 
     function decryptMD5(hash) {
 
-        request('GET',`https://jsonplaceholder.typicode.com/todos/1`)
+        request('GET',`https://md5decrypt.net/en/Api/api.php?hash=${hash}&hash_type=md5&email=envomp@ttu.ee&code=6451ee93cc70c808`)
             .then(data=>{
                 console.log(data);
             }).catch(error => {
-            console.error(${error.statusText})
+            console.error(`Shit!` ${error.statusText})
         });
+        return "Tere";
     }
-    decryptMD5('e4f194cba29960e12d8b8f1bfedc972b');
 </script>
 
 
