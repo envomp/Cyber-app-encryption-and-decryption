@@ -243,6 +243,7 @@
     }
 
 
+
     function decryptMD5(hash) {
 
         request('GET',`https://md5.ovh/index.php?md5=${hash}&result=json`)
@@ -252,6 +253,10 @@
             console.error(`Shit!` ${error.statusText})
         });
     }
+</script>
+
+
+<script>
 
     function showOTPencryptDiv() {
         mode = "OTP-encrypt";
