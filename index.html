@@ -217,7 +217,6 @@
 </body>
 
 <script>
-
     function request (method, url) {
         return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
@@ -246,13 +245,18 @@
 
     function decryptMD5(hash) {
 
-        request('GET',`https://md5decrypt.net/en/Api/api.php?hash=${hash}&hash_type=md5&email=envomp@ttu.ee&code=6451ee93cc70c808`)
+        request('GET',`https://jsonplaceholder.typicode.com/todos/1`)
             .then(data=>{
                 console.log(data);
             }).catch(error => {
-            console.error(Shit! ${error.statusText})
+            console.error(${error.statusText})
         });
     }
+    decryptMD5('e4f194cba29960e12d8b8f1bfedc972b');
+</script>
+
+
+<script>
 
     function showOTPencryptDiv() {
         mode = "OTP-encrypt";
