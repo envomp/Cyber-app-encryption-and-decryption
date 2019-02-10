@@ -217,42 +217,17 @@
 </body>
 
 <script>
-    function request (method, url) {
-        return new Promise(function (resolve, reject) {
-            var xhr = new XMLHttpRequest();
-
-            xhr.open(method, url);
-            xhr.onload = function () {
-                if (this.status >= 200 && this.status < 300) {
-                    resolve(xhr.response);
-                } else {
-                    reject({
-                        status: this.status,
-                        statusText: xhr.statusText
-                    });
-                }
-            };
-            xhr.onerror = function () {
-                reject({
-                    status: this.status,
-                    statusText: xhr.statusText
-                });
-            };
-            xhr.send();
-        });
-    }
-
-
 
     function decryptMD5(hash) {
-
-        request('GET',`https://md5.ovh/index.php?md5=${hash}&result=json`)
-            .then(data=>{
-                console.log(data);
-            }).catch(error => {
-            console.error(`Shit!` ${error.statusText})
-        });
+        let url = ` https://www.md5.ovh/${hash}`;
+        const Http = new XMLHttpRequest();
+        Http.open("GET", url);
+        Http.send();
+        Http.onreadystatechange=(e)=>{
+            console.log(Http.responseText)
+        }
     }
+
 </script>
 
 
@@ -334,7 +309,10 @@
             // source : https://github.com/emn178/js-sha512
             document.getElementById('outputdata').value = sha512(input);
         } else if (mode === "MD5-decrypt") {
-            document.getElementById('outputdata').value = decryptMD5(input);
+            decryptMD5(input).then(function(result) {
+                console.log(result);
+            });
+            // document.getElementById('outputdata').value = decryptMD5(input);
         }
 
     }
