@@ -133,6 +133,12 @@
 
 <script type="text/javascript" src="md5.js"></script>
 
+<script src="md5.js"></script>
+
+<script src="chars.js"></script>
+
+<script src="coordinator.js"></script>
+
 <div class='overlay'>
     <h1 align="center">THIS IS MEGA ULTRA SUPER SECURE CRYPTO APP</h1>
     <div id="outerbox">
@@ -168,7 +174,7 @@
 
             <div id="outputarea" style="text-align:center;border:0 solid lawngreen;display:none;">
                 <h3>Thank you for your generosity :D</h3>
-                <textarea id="outputdata" disabled></textarea>
+                <textarea id="mainlog" disabled></textarea>
 
             </div>
 
@@ -217,46 +223,13 @@
 </body>
 
 <script>
-    function request (method, url) {
-        return new Promise(function (resolve, reject) {
-            var xhr = new XMLHttpRequest();
-            xhr.open(method, url);
-            xhr.onload = function () {
-                if (this.status >= 200 && this.status < 300) {
-                    resolve(xhr.response);
-                } else {
-                    reject({
-                        status: this.status,
-                        statusText: xhr.statusText
-                    });
-                }
-            };
-            xhr.onerror = function () {
-                reject({
-                    status: this.status,
-                    statusText: xhr.statusText
-                });
-            };
-            xhr.send();
-        });
-    }
 
-
-
+    
     function decryptMD5(hash) {
-
-        request('GET',`https://md5decrypt.net/en/Api/api.php?hash=${hash}&hash_type=md5&email=envomp@ttu.ee&code=6451ee93cc70c808`)
-            .then(data=>{
-                console.log(data);
-            }).catch(error => {
-            console.error(error.statusText)
-        });
+    
+        MD5decrypt(hash);
+    
     }
-    decryptMD5('e4f194cba29960e12d8b8f1bfedc972b');
-</script>
-
-
-<script>
 
     function showOTPencryptDiv() {
         mode = "OTP-encrypt";
@@ -324,20 +297,20 @@
         if (mode === "OTP-encrypt") {
 
             // source : https://github.com/vigetlabs/otp/blob/master/languages/JavaScript/src/encrypt.js
-            document.getElementById('outputdata').value = otpencrypt(input, key);
+            document.getElementById("mainlog").value = otpencrypt(input, key);
 
         } else if (mode === "OTP-decrypt") {
             // source : https://github.com/vigetlabs/otp/blob/master/languages/JavaScript/src/decrypt.js
-            document.getElementById('outputdata').value = otpdecrypt(input, key);
+            document.getElementById("mainlog").value = otpdecrypt(input, key);
 
         } else if (mode === "SHA2-to-SHA512") {
             // source : https://github.com/emn178/js-sha512
-            document.getElementById('outputdata').value = sha512(input);
+            document.getElementById("mainlog").value = sha512(input);
         } else if (mode === "MD5-decrypt") {
             decryptMD5(input).then(function(result) {
                 console.log(result);
             });
-            // document.getElementById('outputdata').value = decryptMD5(input);
+            // document.getElementById("mainlog").value = decryptMD5(input);
         }
 
     }
