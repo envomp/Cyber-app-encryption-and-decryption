@@ -1,4 +1,6 @@
-importScripts('md5.js', 'chars.js')
+// Source : https://github.com/feross/md5-password-cracker.js/
+
+importScripts('coordinator.js')
 
 // Cracking settings
 var workerId
