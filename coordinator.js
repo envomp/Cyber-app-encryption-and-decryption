@@ -61,7 +61,7 @@ function MD5decrypt(hash) {
   }
 
   status("Searching for password match for hash '54d75975e615f0638b6181592a4d929f'.")
-  log("Testing uppercase, lowercase, and numbers.")
+  log("Testing uppercase, lowercase, and numbers...  ")
 
 
 // Helper functions
