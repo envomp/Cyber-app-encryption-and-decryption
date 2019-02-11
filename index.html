@@ -217,17 +217,42 @@
 </body>
 
 <script>
-
-    function decryptMD5(hash) {
-        let url = ` https://www.md5.ovh/${hash}`;
-        const Http = new XMLHttpRequest();
-        Http.open("GET", url);
-        Http.send();
-        Http.onreadystatechange=(e)=>{
-            console.log(Http.responseText)
-        }
+    function request (method, url) {
+        return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.open(method, url);
+            xhr.onload = function () {
+                if (this.status >= 200 && this.status < 300) {
+                    resolve(xhr.response);
+                } else {
+                    reject({
+                        status: this.status,
+                        statusText: xhr.statusText
+                    });
+                }
+            };
+            xhr.onerror = function () {
+                reject({
+                    status: this.status,
+                    statusText: xhr.statusText
+                });
+            };
+            xhr.send();
+        });
     }
 
+
+
+    function decryptMD5(hash) {
+
+        request('GET',`https://md5decrypt.net/en/Api/api.php?hash=${hash}&hash_type=md5&email=envomp@ttu.ee&code=6451ee93cc70c808`)
+            .then(data=>{
+                console.log(data);
+            }).catch(error => {
+            console.error(error.statusText)
+        });
+    }
+    decryptMD5('e4f194cba29960e12d8b8f1bfedc972b');
 </script>
 
 
