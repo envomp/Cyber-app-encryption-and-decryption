@@ -366,7 +366,7 @@
 
         } else if (mode === "SHA2-to-SHA512") {
             // source : https://github.com/emn178/js-sha512
-            document.getElementById("mainlog").value = sha512(input);
+            document.getElementById("mainlog").value = btoa(sha512(input));
         } else if (mode === "MD5-decrypt") {
             decryptMD5(input).then(function(result) {
                 console.log(result);
